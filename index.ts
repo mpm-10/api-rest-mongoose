@@ -2,7 +2,7 @@ import bodyParser from "body-parser";
 import express from "express";
 import mongoose from "mongoose";
 import ProgressController from "./src/connection/controllers/ProgressController";
-
+import cors from 'cors';
 
 const progressController : ProgressController = new ProgressController();
 const port : number = 3000;
@@ -12,10 +12,19 @@ mongoose.connect('mongodb+srv://trab_final_sm2023:trab_final_sm2023@cluster0.9gx
 
 const app: express.Application = express();
 
+const allowedOrigins = ['http://localhost:3000'];
+
+const options: cors.CorsOptions =
+{
+  origin: allowedOrigins
+};
+
+app.use(cors(options));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 
+app.get('/', (req : Request, res : Response) => {res.send("API-REST Started!")})
 
 app.get('/progress', progressController.show);
 app.get('/progress/search_id/:id', progressController.indexById);
@@ -27,4 +36,4 @@ app.delete('/progress/:nickname', progressController.destroy);
 
 
 
-app.listen(port, () => console.log('API-REST Started'));
+app.listen(port, () => console.log('API-REST Started!'));
