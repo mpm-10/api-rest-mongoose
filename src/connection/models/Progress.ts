@@ -15,9 +15,9 @@ const ProgressSchema = new mongoose.Schema
         power1 : Number,
         power2 : Number,
         life : Number,
-        stamina : Number, 
+        stamina : Number,
         shield : Number,
-        power : Number
+        armor : Number
     }
 );
 

@@ -24,7 +24,7 @@ app.use(cors(options));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 
-app.get('/', (req : Request, res : Response) => {res.send("API-REST Started!")})
+app.get('/', (req : Request, res : Response) => {res.send("API-REST Started!")});
 
 app.get('/progress', progressController.show);
 app.get('/progress/search_id/:id', progressController.indexById);
@@ -33,7 +33,8 @@ app.get('/progress/search_password/:password', progressController.indexByPasswor
 app.post('/progress', progressController.store);
 app.put('/progress/:nickname', progressController.update);
 app.delete('/progress/:nickname', progressController.destroy);
-
+app.delete('/progress/delete_id/:id', progressController.destroyById);
 
 
 app.listen(port, () => console.log('API-REST Started!'));
+
